@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Water Meter Project Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLQQAIP0sVcf7j8rIWv17wQ/1w9f57EwL3/V5m2Fj1M4j1u1z8aK3v4F74w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; 
+            overflow-x: hidden;
+            padding-top: 5rem; 
+        }
+
+        .hero-header {
+            background-image: url('download (14).jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid #dbeafe; 
+        }
+
+        .section-separator {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, #e0f2fe, #38bdf8, #e0f2fe);
+            margin: 4rem auto;
+            border-radius: 9999px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .clickable-subtitle {
+            cursor: default; 
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .clickable-subtitle:hover {
+            transform: scale(1.02); 
+        }
+        #fixedHeader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+        }
+
+        .purpose-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .purpose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .icon {
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        pre {
+            background-color: #1e293b;
+            color: #f8fafc; 
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        @keyframes wave {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .footer-wave {
+            position: relative;
+            background-color: #1e3a8a; 
+            color: #f0f9ff;
+            padding-top: 5rem; 
+        }
+        .footer-wave::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px; 
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23f0f9ff" d="M0,70 C300,30 600,90 1000,50 L1000,100 L0,100 Z" /></svg>');
+            background-size: 1000px 100px;
+            background-repeat: repeat-x;
+            animation: wave 30s linear infinite;
+            transform: translateY(-100px); 
+        }
+
+        .subscribe-form input[type="email"] {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .subscribe-form input[type="email"]:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); 
+            outline: none;
+        }
+        .subscribe-form button {
+            transition: all 0.3s ease;
+        }
+
+        .subscribe-form button:hover {
+            background-color: #3b82f6; 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #3b82f6; 
+            transform: scale(1.3);
+        }
+
+    </style>
+</head>
+<body class="text-gray-800">
+    <nav id="fixedHeader" class="py-4 px-8 flex justify-center lg:justify-between items-center">
+        <h3 class="text-xl font-extrabold text-blue-900 hidden lg:block">Smart Water Meter</h3>
+        <div class="space-x-4 sm:space-x-8 text-sm sm:text-base overflow-x-auto whitespace-nowrap py-1">
+            <a href="#overview" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Overview</a>
+            <a href="#innovations" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Innovations</a>
+            <a href="#purpose" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Purpose</a>
+            <a href="#sketches" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Sketches</a>
+            <a href="#design-plan" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Design</a>
+            <a href="#arduino-code" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Code</a>
+            <a href="#architecture" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Architecture</a>
+            <a href="#user-interface" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">UI</a>
+            <a href="#final-video" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-semibold">Video</a>
+        </div>
+    </nav>
+    <header class="hero-header relative min-h-screen flex flex-col justify-center items-center text-center p-8 text-white">
+        <div class="relative z-10 max-w-6xl w-full mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-lg leading-tight mb-4">
+                Smart Water Meter Project
+            </h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto">
+                From a drip to a flood, your Smart meter is the first line of defense.
+            </p>
+            
+            <div class="mt-16 grid md:grid-cols-2 gap-8 md:gap-16">
+                <div class="profile-card rounded-2xl p-6 md:p-8 shadow-2xl">
+                    <img src="403880795_6738818549570532_6581422186524537856_n.jpg" alt="Engineer 1 Profile" class="rounded-full mx-auto w-24 h-24 mb-4 border-4 border-blue-400 object-cover">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-1">MANZI Jacques</h2>
+                    <p class="text-blue-600 mb-2">Circuit Coder</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Bringing code to life, one circuit at a time.
+                    </p>
+                </div>
+                <div class="profile-card rounded-2xl p-6 md:p-8 shadow-2xl">
+                    <img src="https://placehold.co/100x100/38bdf8/ffffff?text=T.A" alt="Engineer 2 Profile" class="rounded-full mx-auto w-24 h-24 mb-4 border-4 border-blue-400 object-cover">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-1">TUYIGIRE Amos</h2>
+                    <p class="text-blue-600 mb-2">Architecter</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Architected the data pipeline and cloud-based analytics, turning raw meter data into actionable insights for users.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 container mx-auto p-4 md:p-8">
+        
+        <section id="overview" class="my-16 py-12 rounded-3xl bg-white/90 backdrop-blur-md shadow-xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center p-8 md:p-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-2 text-blue-600">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                        <h2 class="text-3xl font-bold text-blue-800 clickable-subtitle">Project Overview</h2>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        The **Smart Water Meter Project** is a comprehensive IoT solution designed and developed by a dedicated team of two. This project management system provides **real-time monitoring and analysis** of water consumption. This system moves beyond traditional analog meters to empower consumers and utility providers to detect leaks, monitor usage, optimize billing, and promote efficient water use.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        We built a project that combines hardware with a smart online platform. This helps you get personalized information and manage resources in a smarter way for the future.
+                    </p>
+                </div>
+                <div>
+                    <img src="Navigating the Future_ A Comprehensive Analysis of the Smart Water Metering Market.jpg" alt="A smart water meter dashboard" class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="innovations" class="my-16 py-12 rounded-3xl bg-blue-50/70 backdrop-blur-md shadow-xl">
+            <div class="text-center p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-blue-800 mb-2 clickable-subtitle">Key Innovations</h2>
+                <p class="text-gray-700 mb-10 max-w-2xl mx-auto">
+                    Go beyond basic metering with our solution, and unlock the true potential of your data and water efficiency.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4">💧</div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Automated Leak Detection</h3>
+                        <p class="text-gray-600">
+                            This technology uses a variety of sensors and software to continuously monitor for and identify leaks in pipelines without the need for manual inspection. Smart water meters continuously monitor water flow.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4">📊</div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Real-Time Monitoring and Data Analytics</h3>
+                        <p class="text-gray-600">
+                            Provides a live view of consumption via a mobile app and computer. This allows for immediate visualization of daily usage, enabling customers to understand their consumption patterns and make informed decisions.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4">📈</div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Conservation View</h3>
+                        <p class="text-gray-600">
+                            Delivers personalized tips and historical data to help users understand their water footprint and reduce waste. The system keeps a record of past consumption for analysis (hourly, daily, weekly, monthly).
+                        </p>
+                    </div>
+                </div>
+                
+                <br><br>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4"> 🏘️ </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Multi-Communication</h3>
+                        <p class="text-gray-600">
+                            For multi-unit buildings, meters rely on a layered communication architecture, allowing many devices to send data to a single central application (like a smart phone or computer) via a local network.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4">📱</div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Real-Time Control</h3>
+                        <p class="text-gray-600">
+                            This feature refers to the advanced capability to remotely and instantly **open or close a valve** on the meter using a digital command. This allows for immediate, on-demand management of the water supply through a mobile app or computer dashboard.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                        <div class="text-5xl text-blue-500 mb-4">✅💧</div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Optimal Water Quality</h3>
+                        <p class="text-gray-600">
+                            The system goes beyond measuring consumption. It transforms into a real-time monitoring station, providing measures of water's cloudiness (turbidity) and acidity (pH) for ensuring public health.
+                        </p>
+                    </div>
+                </div> 
+
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="purpose" class="my-16 py-12 rounded-3xl bg-white/90 backdrop-blur-md shadow-xl">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Project Purpose & Goals</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    The Smart Water Meter project was initiated with a clear mission to address critical challenges in water management and conservation. Our primary goals are to empower consumers with knowledge, enable utilities to operate more efficiently, and contribute to global sustainability efforts.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="purpose-card p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                        <div class="icon bg-indigo-500 rounded-full mb-6 text-white">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-indigo-800">Foster Water Conservation</h3>
+                        <p class="text-gray-700 mb-4">
+                            The ability to provide actionable insights and immediate feedback. By giving consumers access to their consumption data via mobile apps or web platform.
+                        </p>
+                    </div>
+                    <div class="purpose-card p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                        <div class="icon bg-green-500 rounded-full mb-6 text-white">
+                            <i class="fas fa-bolt text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-green-800">Enhance Utility Efficiency</h3>
+                        <p class="text-gray-700 mb-4">
+                            To give utility companies a robust, real-time tool for remote monitoring, automated data collection, and proactive infrastructure management.
+                        </p>
+                    </div>
+                    <div class="purpose-card p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                        <div class="icon bg-red-500 rounded-full mb-6 text-white">
+                            <i class="fas fa-exclamation-triangle text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-red-800">Minimize Water Loss</h3>
+                        <p class="text-gray-700 mb-4">
+                            To drastically reduce unaccounted-for water loss by enabling fast and accurate detection of leaks and system faults.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-separator"></div>
+        
+        <section id="sketches" class="my-16 py-12 rounded-3xl bg-white/90 backdrop-blur-md shadow-xl">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Project Sketches & Concepts</h2>
+                
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    A look at the initial design and conceptualization phases, from hardware sketches to user interface wireframes.
+                </p>
+
+                <div class="mt-10 mb-8 p-6 bg-blue-100 rounded-2xl shadow-inner">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-6 text-center">Core Components</h3>
+                    <div id="component-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Microcontroller</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Flow Sensor</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-broadcast-tower"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Lora Module</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">LED</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Turbidity Sensor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 mb-8 p-6 bg-blue-100 rounded-2xl shadow-inner">
+                    <div id="component-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-vials"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">PH Sensor</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Temperature Sensor</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Solenoid Valve</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">Power Supply</p>
+                        </div>
+                        <div class="component-item flex flex-col items-center p-4 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl text-blue-500 mb-2">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700">User Interface</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50/70 p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Project Hardware</h3>
+                        <p class="text-gray-700 mb-6">
+                            This is all the physical, tangible components that make up your device or system. Think of it as the "body" of your project. 
+                        </p>
+                        <img src="https://placehold.co/600x400/93c5fd/1e3a8a?text=Hardware+Sketch" alt="A hardware sketch or diagram." class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                    </div>
+                    <div class="bg-blue-50/70 p-8 rounded-2xl shadow-md flex flex-col items-center text-center">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Project PCB Board</h3>
+                        <p class="text-gray-700 mb-6">
+                            This is the central component, acting as the "brain" of the smart water meter. It's a complex board that houses all the electronic components necessary for the meter's operation.
+                        </p>
+                        <img src="https://placehold.co/600x400/93c5fd/1e3a8a?text=PCB+Layout" alt="A schematic of the printed circuit board." class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="design-plan" class="my-16 py-12 rounded-3xl bg-blue-50/70 backdrop-blur-md shadow-xl">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Project Design & Plan</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    This section details the final physical design of the circuit and provides a step-by-step guide for assembly and integration.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Assembled Circuit</h3>
+                        <p class="text-gray-700 mb-6">
+                            A photo of the completed circuit, demonstrating the final layout and connections.
+                        </p>
+                        <img src="https://placehold.co/600x400/bde0ff/3a8ff0?text=Completed+Circuit" alt="A photo of the assembled smart water meter circuit." class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-left">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800 text-center">Project Instructions</h3>
+                        <ol class="text-gray-700 space-y-4 list-decimal list-inside ml-4">
+                            <li>
+                                <span class="font-semibold text-blue-700">Assemble the Hardware:</span>
+                                Connect the water flow sensor, microcontroller (e.g., ESP32), and Wi-Fi module as per the circuit diagram. Ensure all connections are secure.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-blue-700">Power the Device:</span>
+                                Connect the assembled circuit to a stable 5V power supply. Observe the status LEDs on the microcontroller to confirm it is powered on.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-blue-700">Flash the Firmware:</span>
+                                Use the provided software to upload the pre-compiled firmware to the microcontroller. This firmware handles reading data from the sensor and transmitting it.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-blue-700">Configure Wi-Fi:</span>
+                                Follow the on-screen prompts to configure the device's Wi-Fi connection. This will allow the meter to send data to the cloud platform.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-blue-700">Install the Meter:</span>
+                                Install the physical device in-line with your water pipe. Ensure a water-tight seal and proper orientation of the sensor.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-blue-700">Verify Data Flow:</span>
+                                Check the mobile application or cloud dashboard to confirm that water usage data is being received in real-time.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="arduino-code" class="my-16 py-12 rounded-3xl bg-white/90 backdrop-blur-md shadow-xl">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Project Firmware Code</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    This is a static display of the firmware code that runs on the microcontroller.
+                </p>
+                <div class="text-left">
+                    <pre><code>
+// ====================================================
+// Arduino Smart Water Meter Firmware
+// This code is designed to be uploaded using the Arduino IDE.
+// ====================================================
+int sensorPin = 2;
+volatile long pulse;
+unsigned long lastTime;
+float volume;
+void setup() {
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+  attachInterrupt(digitalPinToInterrupt(sensorPin), increase, RISING);
+}
+void loop() {
+  volume = 2.663 * pulse / 1000 * 30;
+  if (millis() - lastTime > 2000) {
+    pulse = 0;
+    lastTime = millis();
+  }
+  Serial.print(volume);
+  Serial.println(" L/m");
+}
+void increase() {
+  pulse++;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="my-16 py-12 rounded-3xl bg-blue-50/70 backdrop-blur-md shadow-xl">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">System Architecture</h2>
+                <img src="2 block diagram.png" alt="System Architecture Diagram" class="rounded-xl w-full h-auto shadow-lg border border-gray-200 mx-auto">
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="user-interface" class="my-16 py-12 rounded-3xl bg-white/80 backdrop-blur-md shadow-xl fade-in">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Smart Water Meter User Interface</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    The user interface provides a clear and intuitive way to monitor and manage water consumption. The dashboard is designed to deliver key insights at a glance, empowering users to make informed decisions.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-blue-50/70 p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Desktop Dashboard</h3>
+                        <p class="text-gray-700 mb-6">
+                            A comprehensive overview of real-time usage, historical data, and leak alerts, accessible from any web browser.
+                        </p>
+                        <img src="https://placehold.co/600x400/93c5fd/ffffff?text=Desktop+Dashboard" alt="A desktop application mockup of the smart water meter dashboard." class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                    </div>
+                    <div class="bg-blue-50/70 p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Mobile App View</h3>
+                        <p class="text-gray-700 mb-6">
+                            Manage your water on the go with our mobile-optimized interface, featuring quick alerts and usage controls.
+                        </p>
+                        <img src="https://placehold.co/600x400/93c5fd/ffffff?text=Mobile+App" alt="A mobile application mockup of the smart water meter interface." class="rounded-xl w-full h-auto shadow-lg border border-gray-200">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="final-video" class="my-16 py-12 rounded-3xl bg-blue-50/70 backdrop-blur-md shadow-xl fade-in">
+            <div class="p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 clickable-subtitle">Final Project Video</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto mb-10">
+                    Watch the Smart Water Meter in action! This video demonstrates the physical prototype, the real-time data flow, and a full showcase of the user interface functionality.
+                </p>
+                <div class="aspect-w-16 aspect-h-9 max-w-4xl mx-auto">
+                    <div class="relative" style="padding-top: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-2xl" 
+                                src="Bebe Cool - Love You Everyday (Lyrics).mp4" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-wave">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 border-b border-blue-800 pb-10">
+                
+                <div class="col-span-2 lg:col-span-1 space-y-4">
+                    <h3 class="text-3xl font-bold text-white tracking-wider">💧 SmartMeter</h3>
+                    <p class="text-blue-200 text-sm max-w-xs">
+                        Leading the future of water management with real-time data and conservation technology.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="social-icon text-white hover:text-blue-400 transition-all duration-300 transform"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="https://www.instagram.com/jacques_slots/" class="social-icon text-white hover:text-blue-400 transition-all duration-300 transform"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://github.com/Dillox11?tab=repositories" class="social-icon text-white hover:text-blue-400 transition-all duration-300 transform"><i class="fab fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white mb-4 border-b-2 border-blue-500 pb-1 inline-block">Documentation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#overview" class="text-blue-200 hover:text-blue-400 transition-colors">Overview</a></li>
+                        <li><a href="#architecture" class="text-blue-200 hover:text-blue-400 transition-colors">Architecture</a></li>
+                        <li><a href="#arduino-code" class="text-blue-200 hover:text-blue-400 transition-colors">Project Code</a></li>
+                        <li><a href="#design-plan" class="text-blue-200 hover:text-blue-400 transition-colors">Installation Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white mb-4 border-b-2 border-blue-500 pb-1 inline-block">Features</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#innovations" class="text-blue-200 hover:text-blue-400 transition-colors">Leak Detection</a></li>
+                        <li><a href="#innovations" class="text-blue-200 hover:text-blue-400 transition-colors">Real-Time Data</a></li>
+                        <li><a href="#purpose" class="text-blue-200 hover:text-blue-400 transition-colors">Water Conservation</a></li>
+                        <li><a href="#innovations" class="text-blue-200 hover:text-blue-400 transition-colors">Remote Control</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white mb-4 border-b-2 border-blue-500 pb-1 inline-block">Through</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="text-blue-200 hover:text-blue-400 transition-colors">Our Team</li>
+                        <li class="text-blue-200 hover:text-blue-400 transition-colors">Contact Us ☎</li>
+                        <li class="text-blue-200 hover:text-blue-400 transition-colors"><i class="fa-solid fa-phone"></i> +250794934827</li>
+                        <li class="text-blue-200 hover:text-blue-400 transition-colors"><i class="fa-solid fa-phone"></i> +250792102934</li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-4 lg:col-span-1 space-y-4">
+                    <p class="text-blue-200 text-sm">
+                        The simplest and most direct choice is:
+                    </p>
+                    <p class="text-blue-200 text-sm">Get Clarity on how this Project saves water and money.</p>
+                    <img src="depositphotos_266451448-stock-illustration-rwanda-flag-vector-illustration-on-removebg-preview.png" width="200" height="200" alt="Small Image">
+                </div>
+
+            </div>
+
+            <div class="pt-8 text-center border-t border-blue-800 mt-8">
+                <p class="text-blue-300 text-sm">
+                    &copy; <span id="current-year"></span> Smart Water Meter Project. All Rights Reserved. Designed by <span class="text-blue-400 font-medium">Jacques_Slots</span>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
